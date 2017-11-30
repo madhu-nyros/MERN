@@ -18,7 +18,7 @@ export default class Home extends Component
             players:[], 
             activeKey:'',
                        
-          }
+     }
      this.getGames = this.getGames.bind(this); 
      this.joined   = this.joined.bind(this);
      this.getId    = this.getId.bind(this);
@@ -31,12 +31,10 @@ export default class Home extends Component
   }
   componentDidMount()
   {
-    	if(!localStorage.playerid)
-    	{
+    	if(!localStorage.playerid){
     		browserHistory.push('/signin');
     	}
-      else
-      {
+      else{
          browserHistory.push('/Home');
       }
        this.getGames();   
@@ -51,10 +49,7 @@ export default class Home extends Component
        datatype:'json',
        success:function(count)
        { 
-           // console.log(count.data)
-           if(count.data)
-           { 
-             // console.log(count);
+           if(count.data)  { 
              this.setState({count:count.data});
            }
        }.bind(this)
@@ -68,8 +63,7 @@ export default class Home extends Component
        datatype:'json',
        success:function(res)
        { 
-           if(res)
-           { 
+           if(res){ 
              this.setState({data:res.data});
            }
        }.bind(this)
@@ -87,13 +81,10 @@ export default class Home extends Component
              playerid:localStorage.getItem('playerid'),
          },
          success:function(response){
-            // console.log(response.data.gameid); //gameid
-            if(response)
-            {
+            if(response){
                 this.getGames();
                 this.getId();
                 this.getCount();
-                // this.setState({gameid:response.data});
             }
 
          }.bind(this)
@@ -107,22 +98,18 @@ export default class Home extends Component
          dataType:'json',
          data:{data:1},
          success:function(response){
-           if(response !== null)
-           {
+           if(response !== null){
                this.setState({games:response.data});
            }
          }.bind(this),
-         error:function(error)
-         {
+         error:function(error){
            console.log(error);
          }
        });
     }
-
   getInitialState() {
     return { showModal: false };
-
-   }
+  }
 
   close() {
     this.setState({ showModal: false });
@@ -198,43 +185,35 @@ export default class Home extends Component
           <Modal.Body>
             <div className="container"> 
               <div className="row">
-                <div className="col-md-4">
-                    {
-                    // (this.state.players.length > 0) ?
-                    //     console.log(this.state.players.length) 
-                    //  :  console.log('fail')
-                    }                  
+                <div className="col-md-4">                 
                     {this.state.players.map(function(data,index){
                        var player=false;
-                      
                       if(localStorage.getItem('playerid') === data.playerid[0]._id)
                       {
                          player=true;
                       }  
-
                 return(                           
-                     <div id="accordion"> 
-                       <Accordion activeKey={this.state.activeKey}>
-                        <Panel style={style} header={data.playerid[0].name} eventKey={data.playerid[0]._id}  onClick={()=>this.handleSelect(data.playerid[0]._id)}>
-                           <p className='text-center'>Name   :  {data.playerid[0].name}</p>
-                           <p className='text-center'>Gender :  {data.playerid[0].gender}</p>
-                           <p className='text-center'>Age    :  {data.playerid[0].age}</p>
-                           {player ? <button className="btn btn-info btn-xs pull-right" onClick = {()=> {this.unjoin(data.gameid[0]._id)}}>Quit</button>
-                          :
-                           ' ' 
-                            }  
-                        </Panel>
-                      </Accordion>
-                     </div>
-                  )                 
-              },this)
-            } 
-
+                         <div id="accordion"> 
+                           <Accordion activeKey={this.state.activeKey}>
+                            <Panel style={style} header={data.playerid[0].name} eventKey={data.playerid[0]._id}  onClick={()=>this.handleSelect(data.playerid[0]._id)}>
+                               <p className='text-center'>Name   :  {data.playerid[0].name}</p>
+                               <p className='text-center'>Gender :  {data.playerid[0].gender}</p>
+                               <p className='text-center'>Age    :  {data.playerid[0].age}</p>
+                               {player ? <button className="btn btn-info btn-xs pull-right" onClick = {()=> {this.unjoin(data.gameid[0]._id)}}>Quit</button>
+                              :
+                               ' ' 
+                                }  
+                            </Panel>
+                          </Accordion>
+                         </div>
+                        )                 
+                     },this)
+                   } 
                </div>
                <div className="col-md-8">
                </div>
-              </div> 
-            </div>     
+            </div> 
+          </div>     
         </Modal.Body>
         <Modal.Footer>
            <button onClick={this.close}>Close</button>

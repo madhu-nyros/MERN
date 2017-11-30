@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import '../App.css';
 import $ from "jquery";
 import {browserHistory} from 'react-router';
-
-
 export default class Registration extends Component{
   constructor(props){
      super(props);
@@ -12,17 +10,14 @@ export default class Registration extends Component{
           passworderror:'',
           cpassworderror:'',
           ageerror:'',
-          gender:'Male',
-
-          
+          gender:'Male',     
     };
     this.register =this.register.bind(this);
     this.handleChange =this.handleChange.bind(this);
   }
    componentDidMount()
    {
-      if(localStorage.playerid)
-      {
+      if(localStorage.playerid){
           browserHistory.push('/');
       }
    }
@@ -35,95 +30,80 @@ export default class Registration extends Component{
        var gender = this.state.gender;
        var namereg      =  new RegExp(/^[A-Za-z]+$/) ;
         var errorflag = 0;
-        if(name === '')
-        {
+        if(name === ''){
            errorflag = 0;
            this.setState({usererror:'Please enter playername'});
         }
-        else if(name.length <= 2)
-        {
+        else if(name.length <= 2){
            errorflag = 0;
           this.setState({usererror:'Name must be more than 3 characters'});
         }
-        else if(!namereg.test(name))
-        {
+        else if(!namereg.test(name)){
            errorflag = 0;
            this.setState({usererror:'Please enter characters only'});  
         }
-        else
-        {
+        else{
             errorflag = 1;    
            this.setState({usererror:''});  
         }
-         if(password === '')
-        {  
+        if(password === ''){  
            errorflag = 0;
            this.setState({passworderror:'Please enter password'});
         }
-        else if(password.length < 8)
-        {
+        else if(password.length < 8){
            errorflag = 0;
            this.setState({passworderror:'Password must be more than 8 characters'});
         }
-        else
-        {
+        else{
            errorflag = 1;  
            this.setState({passworderror:''});
         }
-        if(cpassword === '')
-        {
+        if(cpassword === ''){
            errorflag = 0; 
            this.setState({cpassworderror:' Please enter confirm password '});
         }
-        else if(password !== cpassword)
-        {
+        else if(password !== cpassword){
            errorflag = 0;
            this.setState({cpassworderror:'Confirm password not match'});
         }
-        else
-        {
+        else{
            errorflag = 1;
            this.setState({cpassworderror:''});
         }
-        if(age === '')
-        {
+        if(age === ''){
            errorflag = 0;
            this.setState({ageerror:'Please enter age'});
         } 
-        else if(namereg.test(age))
-        {
+        else if(namereg.test(age)){
           errorflag = 0;
           this.setState({ageerror:'Please enter age in numeric formate'}); 
         }
-        else
-        {
+        else{
           errorflag = 1; 
           this.setState({ageerror:''});
         }
-       
-    if(errorflag === 1 )
-     {
-       $.ajax({
-            url:'http://10.90.90.40:3001/Registration',
-            type:'POST',
-            dataType:'json',
-            data:{
-              name:name,
-              password:password,
-              age:age,
-              gender:gender
-            },
-            success:function(response){
-               console.log(response.data);
+       if(errorflag === 1 ){
+         $.ajax({
+              url:'http://10.90.90.40:3001/Registration',
+              type:'POST',
+              dataType:'json',
+              data:{
+                name:name,
+                password:password,
+                age:age,
+                gender:gender
+              },
+              success:function(response){
+                 console.log(response.data);
 
-               if(response.data !== 0)
-               {
-                  localStorage.setItem('playerid', response.data._id);
-                  localStorage.setItem('playername',response.data.name);
-                  browserHistory.push('/Home');
-               }
-            }
-        });
+                 if(response.data !== 0)
+                 {
+                    localStorage.setItem('playerid', response.data._id);
+                    localStorage.setItem('playername',response.data.name);
+                    browserHistory.push('/Home');
+                 }
+              }
+          });
       } 
       event.preventDefault();
     }
@@ -131,8 +111,7 @@ export default class Registration extends Component{
     {
         this.setState({gender: event.target.value});
     }
-    
-  render(){
+render(){
     return (
        <div className="container">
          <div className="row">

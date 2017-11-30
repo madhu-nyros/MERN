@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-// import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import $ from "jquery";
 import {Modal} from 'react-bootstrap';
 import { Link,browserHistory } from 'react-router';
-
 export default class Header extends Component
 {
-	 constructor(props)
-	 {
+	 constructor(props){
 	 	super(props);
 	 	this.state={
 	 		  invalid:'',
@@ -20,7 +17,6 @@ export default class Header extends Component
         gender:'',
         updatestate:false,
 	 	}
-
 	    this.Login =this.Login.bind(this);
       this.Editprofile =this.Editprofile.bind(this);
 	    this.updateEdit=this.updateEdit.bind(this);
@@ -33,71 +29,55 @@ export default class Header extends Component
       this.genderchange =this.genderchange.bind(this);
       this.logout =this.logout.bind(this);
    }
-     componentDidMount()
-     {
+     componentDidMount(){
        if(!localStorage.playerid)
        {
          browserHistory.push('/signin');
        }
      }
-     Login(event)
-     {
+     Login(event){
        event.preventDefault();
        var name =this.refs.name.value;
        var password =this.refs.password.value;
-       // var namereg  =  new RegExp(/^[A-Za-z]+$/) ;
        var flag=1;
-        if(name === '')
-        {
+        if(name === ''){
            flag=0;
-           // $('#nameerror').text('Please enter name');
            this.setState({nameerror:'Please enter name'});
         }
-       else if(name.length <= 2)
-        {
-            flag=0;
+        else if(name.length <= 2){
+           flag=0;
            this.setState({nameerror:'Name must be more than 3 characters'});
         }
-        else
-        {
+        else{
            this.setState({nameerror:''});
         }
-        if(password === '')
-        {
+        if(password === ''){
            flag =0;
            this.setState({passerror:'Please enter password'});
         }
-        else if(password.length < 8)
-        {
+        else if(password.length < 8){
            flag=0;
            this.setState({passerror:'Password must be more than 8 characters'});
         }
-        else
-        {
+        else{
            this.setState({passerror:''});
         }
-      if(flag === 1)
-      { 
-        $.ajax({
-           url:'http://10.90.90.40:3001/Login',
-           type:'POST',
-           dataType:'json',
-           data:{
+       if(flag === 1){ 
+         $.ajax({
+            url:'http://10.90.90.40:3001/Login',
+            type:'POST',
+            dataType:'json',
+            data:{
                 name:name,
                 password:password
-           },
-           success:function(response){
-                if(response.data !== 0)
-                {
-                    
+            },
+            success:function(response){
+                if(response.data !== 0){
                     localStorage.setItem('playerid', response.data.pid);
                     localStorage.setItem('playername',response.data.pname);
                     browserHistory.push('/Home');
-                      
                 }
-                else
-                {
-                   //login page
+                else{
                    this.setState({nameerror:'Incorrect username/password'});
                 }
            }.bind(this),
@@ -108,10 +88,10 @@ export default class Header extends Component
       });
     }
   }
-    Editprofile()
-    {
-        this.setState({showModal:true});
-      $.ajax({
+  Editprofile()
+  {
+    this.setState({showModal:true});
+     $.ajax({
           url:'http://10.90.90.40:3001/Editprofile',
           type:'POST',
           data:{playerid:localStorage.playerid},
@@ -122,10 +102,7 @@ export default class Header extends Component
                 this.setState({name:editeddata.data[0].name,
                                gender:editeddata.data[0].gender,
                                age:editeddata.data[0].age
-                              
                              }) 
-               // this.setState({editprofile:editeddata.data});
-
              }
           }.bind(this)
       });
@@ -176,10 +153,9 @@ export default class Header extends Component
   }
 	render(){
   	return(
-     
-     <div> 
+      <div> 
      { localStorage.playerid  ? 
-    <div>
+     <div>
       <nav className="navbar navbar-default navbar-fixed-top">
         <div className="navbar-header">
           <Link to={'/Home'}><a className="navbar-brand" id="brand">Sports</a></Link>
@@ -273,14 +249,12 @@ export default class Header extends Component
             <input type="submit" id="submit" className="btn btn-sm btn-default form-control" value="Signin"/>
           </div>
         </form>
-      </nav>
-       
+      </nav>  
      }
-       
      </div>
      );
-    }
-  }
+   }
+ }
 
 
   			 

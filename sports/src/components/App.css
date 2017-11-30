@@ -1,46 +1,16 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-
 .homepage img
 {
-   margin-top:3%; 
+    margin-top:3%; 
 }
 
 /*the below style for header.js */
 #topnav
 {
-   padding-bottom: 3% !important;
+    padding-bottom: 3% !important;
 }
 #topnav ul li
 {
-  list-style-type: none; 
+   list-style-type: none; 
 }
 #topnav .navbar-brand
 {
@@ -49,12 +19,12 @@
 }
 .loginform
 {
-  margin-left: 56%;
+   margin-left: 56%;
 }
 
 .loglabel
 {
-  display: block !important;
+   display: block !important;
 }
 .loglabel #name,#pwd
 {
@@ -72,15 +42,15 @@
 }
 #nameerror,#passerror
 {
-  max-width: 200px;
-  min-width:150px;
-  font-size: 13px;
-  display: block;
-  position: absolute;
+   max-width: 200px;
+   min-width:150px;
+   font-size: 13px;
+   display: block;
+   position: absolute;
 }
 #submit
 {
-  margin-top:23px;
+   margin-top:23px;
 }
 #brand 
 {
@@ -91,17 +61,12 @@
   cursor: pointer;
 }
 /*end of the header.js */
-
-
 /*registration from styles */
-
 .err{
   color:red; 
 }
 /* registration form styles end*/
-
 /*home page styles*/
-
 .nav li #logout
 {
    padding-right: 30px !important;
@@ -125,15 +90,8 @@
 {
    text-decoration: none;
 }
-/*.grid .panel .panel-footer button
-{
-   margin-left:140px;
-}*/
-
 /*home page styles end */
-
 /*modal page style start*/
-/*.discontainer h4 ul li */
 .pattributes li
 {
    display: inline-flex !important;
@@ -152,23 +110,17 @@
 {
    color:#428ff4;
 }
-
-
 #plyrsgrid .panel-footer
 { 
    max-height:40px !important;
    min-height:38px !important;
 }
-
 #accordion #panel
 {
    cursor:pointer !important;
 } 
 /*displaydetails page style end*/
-
-
 /*edit form style start*/
-
  #viewprofile
  {
    margin-top: -7px;
